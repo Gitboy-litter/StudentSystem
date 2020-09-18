@@ -4,6 +4,7 @@ package com.dbunit;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.entity.Page;
 import com.entity.Student;
+import com.entity.Teacher;
 
 import javax.naming.Name;
 import java.io.IOException;
@@ -161,6 +162,39 @@ public class DbUnit {
         return list;
     }
 
+    public static List limitTeacher(String sql,String name, Page page) {
+        ArrayList<Teacher> list = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        boolean next=true;
+        ResultSet resultSet=null;
+        try {
+            connection = DbUnit.Connet();
+            statement = connection.prepareStatement(sql);
+            statement.setObject(1,"%"+name+"%");
+            statement.setObject(2, (page.getPageCurren()-1)*page.getPageSize());
+            statement.setObject(3, page.getPageSize());
+            resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                Teacher teacher=new Teacher();
+                teacher.setTno(resultSet.getString("tno"));
+                teacher.setTname(resultSet.getString("tname"));
+                teacher.setTsex(resultSet.getString("tsex"));
+                teacher.setTage(resultSet.getString("tage"));
+                teacher.setTeb(resultSet.getString("teb"));
+                teacher.setTpt(resultSet.getString("tpt"));
+                teacher.setCno1(resultSet.getString("cno1"));
+                teacher.setCno2(resultSet.getString("cno2"));
+                teacher.setCno3(resultSet.getString("cno3"));
+                list.add(teacher);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            close(connection,statement);
+        }
+        return list;
+    }
 
     public static List selectALL(String sql) {
         ArrayList<Student> list = new ArrayList<>();

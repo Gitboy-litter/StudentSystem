@@ -22,10 +22,9 @@ import java.util.Map;
  * @Date: 2020/9/16 20:05
  * @Version: 1.0
  */
-@WebServlet("/update")
+@WebServlet("/studentupdate")
 public class UpdateStudent extends HttpServlet {
     private StudentService studentService = new StudentService();
-
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map parameterMap = req.getParameterMap();

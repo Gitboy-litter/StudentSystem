@@ -19,15 +19,16 @@
     <h2>欢迎到来</h2>
     <div class="login-top">
         <h1>登陆界面</h1>
-        <form action="/login">
+        <form action="/login" method="post">
             <c:if test="${msg!=null}">
                 ${msg}
             </c:if>
-            <input type="text" name="username" class="username" value="用户名" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '用户名';}" ><br>
-            <input type="password" name="password" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"><br>
+            <input type="text" name="username" class="username" value="用户名" onfocus="this.value = '${cookie.username.value}';" onblur="if (this.value == '') {this.value = '用户名';}" ><br>
+            <input type="password" name="password" value="password" onfocus="this.value = '${cookie.password.value}';" onblur="if (this.value == '') {this.value = 'password';}"><br>
             <input type="radio" name="type" value="student" checked="checked" ><span style="color: #F45B4B">学生</span>
             <input type="radio" name="type" value="teacher"><span style="color: #F45B4B">教师</span>
-            <input type="radio" name="type" value="admin"><span style="color: #F45B4B">管理员</span>
+            <input type="radio" name="type" value="admin"><span style="color: #F45B4B">管理员</span><br><br>
+            <input type="checkbox" name="remember" value="7"><span style="color: #F45B4B">七天免登陆</span>
                 <div class="forgot">
                     <input type="submit" value="登陆" >
                 </div>

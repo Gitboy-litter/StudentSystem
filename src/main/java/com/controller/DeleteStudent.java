@@ -18,7 +18,7 @@ import java.io.IOException;
  * @Date: 2020/9/16 13:27
  * @Version: 1.0
  */
-@WebServlet("/delete")
+@WebServlet("/deletestudent")
 public class DeleteStudent extends HttpServlet {
     private StudentService studentService=new StudentService();
     @Override
